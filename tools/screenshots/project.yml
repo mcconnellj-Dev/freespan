@@ -1,0 +1,34 @@
+# Offscreen screenshot harness for Freespan's marketing page. Separate from the app's own project.yml.
+# Regenerate with: xcodegen generate --spec tools/screenshots/project.yml (see render.sh)
+name: FreespanShots
+options:
+  deploymentTarget:
+    macOS: "15.0"
+  createIntermediateGroups: true
+packages:
+  FreespanKit:
+    path: ../../FreespanKit
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+targets:
+  FreespanShots:
+    type: application
+    platform: macOS
+    sources:
+      - path: ../../App/Sources
+        excludes:
+          - FreespanApp.swift
+      - path: ../../App/Resources
+      - path: Sources
+    dependencies:
+      - package: FreespanKit
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.mcconnelldigital.FreespanShots
+        GENERATE_INFOPLIST_FILE: YES
+        CODE_SIGN_STYLE: Manual
+        CODE_SIGN_IDENTITY: "-"
+        ENABLE_HARDENED_RUNTIME: NO
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor

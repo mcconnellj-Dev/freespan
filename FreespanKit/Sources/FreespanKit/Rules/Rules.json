@@ -1,0 +1,857 @@
+[
+  {
+    "id": "trash",
+    "title": "Trash",
+    "pluralTitle": "Trash",
+    "explanation": "Things you've already deleted. They still take up space until you empty the Trash in Finder (right-click the Trash in the Dock and choose Empty Trash).",
+    "category": "caches", "label": "review", "regenerates": false,
+    "match": { "paths": ["~/.Trash"], "kind": "dir" }
+  },
+  {
+    "id": "photos-library",
+    "title": "Photos library",
+    "pluralTitle": "Photos libraries",
+    "explanation": "Your photo and video library. Manage it inside the Photos app (for example, delete large videos or turn on Optimize Mac Storage) rather than removing files here.",
+    "category": "media", "label": "keep", "regenerates": false,
+    "match": { "paths": ["**/*.photoslibrary", "**/*.photolibrary"], "kind": "dir" }
+  },
+  {
+    "id": "music-library",
+    "title": "Music library",
+    "pluralTitle": "Music libraries",
+    "explanation": "Your Music app library. Manage songs and downloads inside the Music app.",
+    "category": "media", "label": "keep", "regenerates": false,
+    "match": { "paths": ["**/*.musiclibrary"], "kind": "dir" }
+  },
+  {
+    "id": "music-folder",
+    "title": "Music folder",
+    "pluralTitle": "Music folders",
+    "explanation": "Your music and the Music app's library. Manage it in the Music app; Freespan won't remove it.",
+    "category": "media", "label": "keep", "regenerates": false,
+    "match": { "paths": ["~/Music"], "kind": "dir" }
+  },
+  {
+    "id": "movies-folder",
+    "title": "Movies folder",
+    "pluralTitle": "Movies folders",
+    "explanation": "Your videos and projects from apps like iMovie and Final Cut. Review and remove videos yourself in Finder or in those apps.",
+    "category": "media", "label": "keep", "regenerates": false,
+    "match": { "paths": ["~/Movies"], "kind": "dir" }
+  },
+  {
+    "id": "zoom-recordings",
+    "title": "Zoom recordings",
+    "pluralTitle": "Zoom recordings",
+    "explanation": "Meetings you recorded with Zoom. Freespan won't remove them; delete recordings you no longer need in Finder.",
+    "category": "media",
+    "label": "keep",
+    "regenerates": false,
+    "match": {
+      "paths": [
+        "~/Documents/Zoom"
+      ],
+      "kind": "dir"
+    }
+  },
+
+  {
+    "id": "xcode-derived-data",
+    "title": "Xcode build data (DerivedData)",
+    "pluralTitle": "Xcode build data (DerivedData)",
+    "explanation": "Temporary build products and indexes Xcode creates for each project. Safe to remove; Xcode rebuilds them the next time you build, which just takes a little longer.",
+    "category": "developer", "label": "safe", "regenerates": true,
+    "match": { "paths": ["~/Library/Developer/Xcode/DerivedData"], "kind": "dir" }
+  },
+  {
+    "id": "xcode-archives",
+    "title": "Xcode archive",
+    "pluralTitle": "Xcode archives",
+    "explanation": "A saved build of an app you archived for the App Store or TestFlight. Keep archives of versions still in use, because you need them to read crash reports from those builds; older ones can go.",
+    "category": "developer", "label": "review", "regenerates": false,
+    "match": { "paths": ["~/Library/Developer/Xcode/Archives/*/*.xcarchive", "~/Library/Developer/Xcode/Archives/*.xcarchive"], "kind": "dir" }
+  },
+  {
+    "id": "xcode-device-support",
+    "title": "Device support files",
+    "pluralTitle": "Device support files",
+    "explanation": "Debugging symbols Xcode copied from an iPhone, iPad or Apple Watch for one OS version. Safe to remove; Xcode copies them again the next time you connect a device running that version.",
+    "category": "developer", "label": "safe", "regenerates": true,
+    "match": { "paths": ["~/Library/Developer/Xcode/*OS DeviceSupport"], "kind": "dir", "matchChildren": true }
+  },
+  {
+    "id": "xcode-previews",
+    "title": "SwiftUI preview data",
+    "pluralTitle": "SwiftUI preview data",
+    "explanation": "Simulators and caches Xcode uses to show SwiftUI previews. Safe to remove; Xcode recreates them the next time you open a preview.",
+    "category": "developer", "label": "safe", "regenerates": true,
+    "match": { "paths": ["~/Library/Developer/Xcode/UserData/Previews"], "kind": "dir" }
+  },
+  {
+    "id": "xcode-documentation-cache",
+    "title": "Xcode documentation cache",
+    "pluralTitle": "Xcode documentation caches",
+    "explanation": "Downloaded developer documentation. Safe to remove; Xcode downloads it again when you open the documentation window.",
+    "category": "developer", "label": "safe", "regenerates": true,
+    "match": { "paths": ["~/Library/Developer/Xcode/DocumentationCache"], "kind": "dir" }
+  },
+  {
+    "id": "simulator-caches",
+    "title": "Simulator caches",
+    "pluralTitle": "Simulator caches",
+    "explanation": "Cached data the iOS Simulator keeps to start up faster. Safe to remove; it's rebuilt automatically.",
+    "category": "developer", "label": "safe", "regenerates": true,
+    "match": { "paths": ["~/Library/Developer/CoreSimulator/Caches"], "kind": "dir" }
+  },
+  {
+    "id": "simulator-device",
+    "title": "Simulator device",
+    "pluralTitle": "Simulator devices",
+    "explanation": "One simulated iPhone, iPad or Watch, including the apps and data installed on it. Removing it erases that simulator; you can create a fresh one in Xcode any time.",
+    "category": "developer", "label": "review", "regenerates": false,
+    "match": { "paths": ["~/Library/Developer/CoreSimulator/Devices"], "kind": "dir", "matchChildren": true }
+  },
+  {
+    "id": "swiftpm-cache",
+    "title": "Swift Package Manager cache",
+    "pluralTitle": "Swift Package Manager caches",
+    "explanation": "Downloaded copies of Swift packages. Safe to remove; they're downloaded again the next time a project resolves its packages.",
+    "category": "developer", "label": "safe", "regenerates": true,
+    "match": { "paths": ["~/Library/Caches/org.swift.swiftpm"], "kind": "dir" }
+  },
+  {
+    "id": "cocoapods-cache",
+    "title": "CocoaPods cache",
+    "pluralTitle": "CocoaPods caches",
+    "explanation": "Downloaded copies of CocoaPods libraries. Safe to remove; `pod install` downloads them again when needed.",
+    "category": "developer", "label": "safe", "regenerates": true,
+    "match": { "paths": ["~/Library/Caches/CocoaPods"], "kind": "dir" }
+  },
+  {
+    "id": "homebrew-cache",
+    "title": "Homebrew downloads",
+    "pluralTitle": "Homebrew downloads",
+    "explanation": "Installer files Homebrew downloaded. Safe to remove; your installed tools keep working, and Homebrew re-downloads if it ever needs them.",
+    "category": "developer", "label": "safe", "regenerates": true,
+    "match": { "paths": ["~/Library/Caches/Homebrew"], "kind": "dir" }
+  },
+  {
+    "id": "yarn-cache",
+    "title": "Yarn cache",
+    "pluralTitle": "Yarn caches",
+    "explanation": "Downloaded JavaScript packages kept by Yarn. Safe to remove; Yarn downloads them again on the next install.",
+    "category": "developer", "label": "safe", "regenerates": true,
+    "match": { "paths": ["~/Library/Caches/Yarn", "~/.yarn/berry/cache", "~/.cache/yarn"], "kind": "dir" }
+  },
+  {
+    "id": "pnpm-store",
+    "title": "pnpm package store",
+    "pluralTitle": "pnpm package stores",
+    "explanation": "Shared JavaScript packages kept by pnpm. Safe to remove; pnpm downloads them again on the next install.",
+    "category": "developer", "label": "safe", "regenerates": true,
+    "match": { "paths": ["~/Library/pnpm/store", "~/Library/Caches/pnpm", "~/.pnpm-store"], "kind": "dir" }
+  },
+  {
+    "id": "npm-cache",
+    "title": "npm cache",
+    "pluralTitle": "npm caches",
+    "explanation": "Downloaded JavaScript packages kept by npm. Safe to remove; npm downloads them again on the next install.",
+    "category": "developer", "label": "safe", "regenerates": true,
+    "match": { "paths": ["~/.npm"], "kind": "dir" }
+  },
+  {
+    "id": "bun-cache",
+    "title": "Bun cache",
+    "pluralTitle": "Bun caches",
+    "explanation": "Downloaded JavaScript packages kept by Bun. Safe to remove; Bun downloads them again on the next install.",
+    "category": "developer", "label": "safe", "regenerates": true,
+    "match": { "paths": ["~/.bun/install/cache"], "kind": "dir" }
+  },
+  {
+    "id": "pip-cache",
+    "title": "Python pip cache",
+    "pluralTitle": "Python pip caches",
+    "explanation": "Downloaded Python packages kept by pip. Safe to remove; pip downloads them again when you install something.",
+    "category": "developer", "label": "safe", "regenerates": true,
+    "match": { "paths": ["~/Library/Caches/pip", "~/.cache/pip"], "kind": "dir" }
+  },
+  {
+    "id": "uv-cache",
+    "title": "uv Python package cache",
+    "pluralTitle": "uv Python package caches",
+    "explanation": "Python packages the uv tool downloaded. Safe to remove; uv downloads them again when a project needs them. Your Python environments share files with this cache, so clearing it can free less space than shown.",
+    "category": "developer", "label": "safe", "regenerates": true,
+    "match": { "paths": ["~/.cache/uv", "~/Library/Caches/uv"], "kind": "dir" }
+  },
+  {
+    "id": "gradle-cache",
+    "title": "Gradle cache",
+    "pluralTitle": "Gradle caches",
+    "explanation": "Downloaded Java/Android libraries and Gradle versions. Safe to remove; Gradle downloads them again on the next build.",
+    "category": "developer", "label": "safe", "regenerates": true,
+    "match": { "paths": ["~/.gradle/caches", "~/.gradle/wrapper/dists"], "kind": "dir" }
+  },
+  {
+    "id": "cargo-registry",
+    "title": "Rust crate cache",
+    "pluralTitle": "Rust crate caches",
+    "explanation": "Downloaded Rust packages kept by Cargo. Safe to remove; Cargo downloads them again on the next build.",
+    "category": "developer", "label": "safe", "regenerates": true,
+    "match": { "paths": ["~/.cargo/registry"], "kind": "dir" }
+  },
+  {
+    "id": "docker-disk-image",
+    "title": "Docker Desktop disk image",
+    "pluralTitle": "Docker Desktop disk images",
+    "explanation": "The virtual disk holding all your Docker images, containers and volumes. Removing it erases all of them; prefer Docker Desktop's own cleanup (Troubleshoot > Clean / Purge data or `docker system prune`).",
+    "category": "developer", "label": "review", "regenerates": false,
+    "match": { "paths": ["~/Library/Containers/com.docker.docker/Data/vms/**/Docker.raw"], "kind": "file" }
+  },
+  {
+    "id": "node-modules",
+    "title": "node_modules folder",
+    "pluralTitle": "node_modules folders",
+    "explanation": "JavaScript packages installed for one project. Safe to remove; running `npm install` (or yarn/pnpm) in the project brings them back.",
+    "category": "developer", "label": "safe", "regenerates": true,
+    "match": {
+      "paths": ["~/**/node_modules"], "kind": "dir",
+      "excludePaths": ["~/Library/**", "~/.*/**"],
+      "notInside": ["node_modules"]
+    }
+  },
+  {
+    "id": "swift-build-folder",
+    "title": "Swift package build folder",
+    "pluralTitle": "Swift package build folders",
+    "explanation": "Build products for a Swift package (its .build folder). Safe to remove; the next `swift build` or Xcode build recreates it.",
+    "category": "developer", "label": "safe", "regenerates": true,
+    "match": {
+      "paths": ["~/**/.build"], "kind": "dir",
+      "excludePaths": ["~/Library/**", "~/.*/**"],
+      "notInside": ["node_modules", ".build"]
+    }
+  },
+
+  {
+    "id": "mail-downloads",
+    "title": "Mail attachment copies",
+    "pluralTitle": "Mail attachment copies",
+    "explanation": "Copies of attachments you opened from Mail. Safe to remove; the originals stay in your email and Mail re-downloads them when you open them again.",
+    "category": "caches", "label": "safe", "regenerates": true,
+    "match": { "paths": ["~/Library/Containers/com.apple.mail/Data/Library/Mail Downloads", "~/Library/Mail Downloads"], "kind": "dir" }
+  },
+  {
+    "id": "sandboxed-app-cache",
+    "title": "App cache",
+    "pluralTitle": "App caches",
+    "explanation": "Temporary files a Mac App Store app keeps to work faster. Safe to remove; the app rebuilds what it needs, though it may be a bit slower the first time.",
+    "category": "caches", "label": "safe", "regenerates": true,
+    "match": { "paths": ["~/Library/Containers/*/Data/Library/Caches"], "kind": "dir" }
+  },
+  {
+    "id": "editor-cache",
+    "title": "Code editor cache",
+    "pluralTitle": "Code editor caches",
+    "explanation": "Cached data and downloaded update files kept by VS Code or Cursor. Safe to remove; the editor rebuilds it, and your settings and extensions are not affected.",
+    "category": "caches", "label": "safe", "regenerates": true,
+    "match": { "paths": ["~/Library/Application Support/Code/Cache", "~/Library/Application Support/Code/CachedData", "~/Library/Application Support/Code/CachedExtensionVSIXs", "~/Library/Application Support/Code/Service Worker/CacheStorage", "~/Library/Application Support/Cursor/Cache", "~/Library/Application Support/Cursor/CachedData"], "kind": "dir" }
+  },
+  {
+    "id": "browser-automation-cache",
+    "title": "Test browser downloads",
+    "pluralTitle": "Test browser downloads",
+    "explanation": "Browsers downloaded by testing tools like Puppeteer or Playwright. Safe to remove; the tool downloads them again the next time it runs.",
+    "category": "developer", "label": "safe", "regenerates": true,
+    "match": { "paths": ["~/.cache/puppeteer", "~/.cache/ms-playwright"], "kind": "dir" }
+  },
+  {
+    "id": "browser-cache",
+    "title": "Browser cache",
+    "pluralTitle": "Browser caches",
+    "explanation": "Web pages, scripts and images Chrome, Edge, Brave or Arc saved so sites load faster. Safe to remove (best with the browser closed); it downloads them again as you browse. Bookmarks, passwords, history and open tabs aren't affected.",
+    "category": "caches",
+    "label": "safe",
+    "regenerates": true,
+    "match": {
+      "paths": [
+        "~/Library/Application Support/Google/*/*/Cache",
+        "~/Library/Application Support/Google/*/*/Code Cache",
+        "~/Library/Application Support/Google/*/*/GPUCache",
+        "~/Library/Application Support/Google/*/*/DawnCache",
+        "~/Library/Application Support/Google/*/*/DawnGraphiteCache",
+        "~/Library/Application Support/Google/*/*/DawnWebGPUCache",
+        "~/Library/Application Support/Google/*/*/Service Worker/CacheStorage",
+        "~/Library/Application Support/Google/*/*/Service Worker/ScriptCache",
+        "~/Library/Application Support/Microsoft Edge/*/Cache",
+        "~/Library/Application Support/Microsoft Edge/*/Code Cache",
+        "~/Library/Application Support/Microsoft Edge/*/GPUCache",
+        "~/Library/Application Support/Microsoft Edge/*/DawnCache",
+        "~/Library/Application Support/Microsoft Edge/*/DawnGraphiteCache",
+        "~/Library/Application Support/Microsoft Edge/*/DawnWebGPUCache",
+        "~/Library/Application Support/Microsoft Edge/*/Service Worker/CacheStorage",
+        "~/Library/Application Support/Microsoft Edge/*/Service Worker/ScriptCache",
+        "~/Library/Application Support/BraveSoftware/Brave-Browser/*/Cache",
+        "~/Library/Application Support/BraveSoftware/Brave-Browser/*/Code Cache",
+        "~/Library/Application Support/BraveSoftware/Brave-Browser/*/GPUCache",
+        "~/Library/Application Support/BraveSoftware/Brave-Browser/*/DawnCache",
+        "~/Library/Application Support/BraveSoftware/Brave-Browser/*/DawnGraphiteCache",
+        "~/Library/Application Support/BraveSoftware/Brave-Browser/*/DawnWebGPUCache",
+        "~/Library/Application Support/BraveSoftware/Brave-Browser/*/Service Worker/CacheStorage",
+        "~/Library/Application Support/BraveSoftware/Brave-Browser/*/Service Worker/ScriptCache",
+        "~/Library/Application Support/Arc/User Data/*/Cache",
+        "~/Library/Application Support/Arc/User Data/*/Code Cache",
+        "~/Library/Application Support/Arc/User Data/*/GPUCache",
+        "~/Library/Application Support/Arc/User Data/*/DawnCache",
+        "~/Library/Application Support/Arc/User Data/*/DawnGraphiteCache",
+        "~/Library/Application Support/Arc/User Data/*/DawnWebGPUCache",
+        "~/Library/Application Support/Arc/User Data/*/Service Worker/CacheStorage",
+        "~/Library/Application Support/Arc/User Data/*/Service Worker/ScriptCache",
+        "~/Library/Application Support/Google/Chrome/GrShaderCache",
+        "~/Library/Application Support/Google/Chrome/GraphiteDawnCache",
+        "~/Library/Application Support/Google/Chrome/ShaderCache",
+        "~/Library/Application Support/Google/Chrome/component_crx_cache",
+        "~/Library/Application Support/Google/Chrome/extensions_crx_cache",
+        "~/Library/Application Support/Microsoft Edge/GrShaderCache",
+        "~/Library/Application Support/Microsoft Edge/GraphiteDawnCache",
+        "~/Library/Application Support/Microsoft Edge/ShaderCache",
+        "~/Library/Application Support/Microsoft Edge/component_crx_cache",
+        "~/Library/Application Support/Microsoft Edge/extensions_crx_cache",
+        "~/Library/Application Support/BraveSoftware/Brave-Browser/GrShaderCache",
+        "~/Library/Application Support/BraveSoftware/Brave-Browser/GraphiteDawnCache",
+        "~/Library/Application Support/BraveSoftware/Brave-Browser/ShaderCache",
+        "~/Library/Application Support/BraveSoftware/Brave-Browser/component_crx_cache",
+        "~/Library/Application Support/BraveSoftware/Brave-Browser/extensions_crx_cache",
+        "~/Library/Application Support/Arc/User Data/GrShaderCache",
+        "~/Library/Application Support/Arc/User Data/GraphiteDawnCache",
+        "~/Library/Application Support/Arc/User Data/ShaderCache",
+        "~/Library/Application Support/Arc/User Data/component_crx_cache",
+        "~/Library/Application Support/Arc/User Data/extensions_crx_cache"
+      ],
+      "kind": "dir"
+    }
+  },
+  {
+    "id": "chrome-ai-model",
+    "title": "Chrome on-device AI model",
+    "pluralTitle": "Chrome on-device AI models",
+    "explanation": "An AI model Chrome downloads to run features like writing help on your Mac. Removing it frees the space, but Chrome downloads it again while those AI features are turned on.",
+    "category": "caches",
+    "label": "review",
+    "regenerates": true,
+    "match": {
+      "paths": [
+        "~/Library/Application Support/Google/Chrome/OptGuideOnDeviceModel",
+        "~/Library/Application Support/Google/Chrome/OptGuideOnDeviceClassifierModel",
+        "~/Library/Application Support/Microsoft Edge/OptGuideOnDeviceModel"
+      ],
+      "kind": "dir"
+    }
+  },
+  {
+    "id": "google-updater-cache",
+    "title": "Google updater downloads",
+    "pluralTitle": "Google updater downloads",
+    "explanation": "Update packages Google's background updater downloaded for Chrome and other Google apps. Safe to remove; it downloads what it needs for the next update.",
+    "category": "caches",
+    "label": "safe",
+    "regenerates": true,
+    "match": {
+      "paths": [
+        "~/Library/Application Support/Google/GoogleUpdater/crx_cache",
+        "~/Library/Caches/com.google.GoogleUpdater"
+      ],
+      "kind": "dir"
+    }
+  },
+  {
+    "id": "electron-app-cache",
+    "title": "App web cache",
+    "pluralTitle": "App web caches",
+    "explanation": "Cached web content kept by apps built on web technology, such as Slack, Discord, Teams or Claude. Safe to remove (best with the app closed); the app rebuilds it, and your sign-in, settings and messages aren't affected.",
+    "category": "caches",
+    "label": "safe",
+    "regenerates": true,
+    "match": {
+      "paths": [
+        "~/Library/Application Support/Slack/Cache",
+        "~/Library/Application Support/Slack/CachedData",
+        "~/Library/Application Support/Slack/Service Worker/CacheStorage",
+        "~/Library/Application Support/discord/Cache",
+        "~/Library/Application Support/discord/CachedData",
+        "~/Library/Application Support/discord/Service Worker/CacheStorage",
+        "~/Library/Application Support/Microsoft/Teams/Cache",
+        "~/Library/Application Support/Microsoft/Teams/CachedData",
+        "~/Library/Application Support/Microsoft/Teams/Service Worker/CacheStorage",
+        "~/Library/Application Support/Claude/Cache",
+        "~/Library/Application Support/Claude/CachedData",
+        "~/Library/Application Support/Claude/Service Worker/CacheStorage",
+        "~/Library/Application Support/Cursor/Service Worker/CacheStorage",
+        "~/Library/Application Support/Notion/Cache",
+        "~/Library/Application Support/Notion/CachedData",
+        "~/Library/Application Support/Notion/Service Worker/CacheStorage",
+        "~/Library/Application Support/Figma/Cache",
+        "~/Library/Application Support/Figma/CachedData",
+        "~/Library/Application Support/Figma/Service Worker/CacheStorage",
+        "~/Library/Application Support/Postman/Cache",
+        "~/Library/Application Support/Postman/CachedData",
+        "~/Library/Application Support/Postman/Service Worker/CacheStorage",
+        "~/Library/Application Support/Linear/Cache",
+        "~/Library/Application Support/Linear/CachedData",
+        "~/Library/Application Support/Linear/Service Worker/CacheStorage",
+        "~/Library/Application Support/Obsidian/Cache",
+        "~/Library/Application Support/Obsidian/CachedData",
+        "~/Library/Application Support/Obsidian/Service Worker/CacheStorage",
+        "~/Library/Application Support/WhatsApp/Cache",
+        "~/Library/Application Support/WhatsApp/CachedData",
+        "~/Library/Application Support/WhatsApp/Service Worker/CacheStorage",
+        "~/Library/Application Support/Signal/Cache",
+        "~/Library/Application Support/Signal/CachedData",
+        "~/Library/Application Support/Signal/Service Worker/CacheStorage",
+        "~/Library/Containers/com.tinyspeck.slackmacgap/Data/Library/Application Support/Slack/Cache",
+        "~/Library/Containers/com.tinyspeck.slackmacgap/Data/Library/Application Support/Slack/Code Cache",
+        "~/Library/Containers/com.tinyspeck.slackmacgap/Data/Library/Application Support/Slack/GPUCache",
+        "~/Library/Containers/com.tinyspeck.slackmacgap/Data/Library/Application Support/Slack/Service Worker/CacheStorage",
+        "~/Library/Application Support/*/Code Cache",
+        "~/Library/Application Support/*/GPUCache",
+        "~/Library/Application Support/*/DawnCache",
+        "~/Library/Application Support/*/DawnGraphiteCache",
+        "~/Library/Application Support/*/DawnWebGPUCache"
+      ],
+      "kind": "dir"
+    }
+  },
+  {
+    "id": "spotify-offline",
+    "title": "Spotify offline music",
+    "pluralTitle": "Spotify offline music",
+    "explanation": "Songs and podcasts Spotify saved for offline listening, plus its streaming cache. Removing it frees the space, but anything you downloaded has to be downloaded again in Spotify.",
+    "category": "media",
+    "label": "review",
+    "regenerates": false,
+    "match": {
+      "paths": [
+        "~/Library/Application Support/Spotify/PersistentCache"
+      ],
+      "kind": "dir"
+    }
+  },
+  {
+    "id": "jetbrains-cache",
+    "title": "JetBrains IDE caches",
+    "pluralTitle": "JetBrains IDE caches",
+    "explanation": "Indexes and caches from JetBrains IDEs such as IntelliJ IDEA, PyCharm or WebStorm. Safe to remove; the IDE re-indexes your projects the next time you open them, which can take a few minutes.",
+    "category": "developer",
+    "label": "safe",
+    "regenerates": true,
+    "match": {
+      "paths": [
+        "~/Library/Caches/JetBrains"
+      ],
+      "kind": "dir"
+    }
+  },
+  {
+    "id": "android-system-images",
+    "title": "Android emulator system image",
+    "pluralTitle": "Android emulator system images",
+    "explanation": "The Android system an emulator runs, for one Android version. Removing it frees the space, but emulators using that version won't start until you download it again in Android Studio's SDK Manager.",
+    "category": "developer",
+    "label": "review",
+    "regenerates": false,
+    "match": {
+      "paths": [
+        "~/Library/Android/sdk/system-images"
+      ],
+      "kind": "dir",
+      "matchChildren": true
+    }
+  },
+  {
+    "id": "ollama-models",
+    "title": "Ollama AI models",
+    "pluralTitle": "Ollama AI models",
+    "explanation": "AI models you downloaded with Ollama. Removing this deletes every model; you can download the ones you need again with `ollama pull`. To remove just one, run `ollama rm <name>` in Terminal instead.",
+    "category": "developer",
+    "label": "review",
+    "regenerates": false,
+    "match": {
+      "paths": [
+        "~/.ollama/models"
+      ],
+      "kind": "dir"
+    }
+  },
+  {
+    "id": "huggingface-cache",
+    "title": "Hugging Face model downloads",
+    "pluralTitle": "Hugging Face model downloads",
+    "explanation": "AI models and datasets downloaded by Hugging Face tools (for example Python's transformers library). Removing them is fine if you don't need them offline; code that uses them downloads them again, which can take a while for large models.",
+    "category": "developer",
+    "label": "review",
+    "regenerates": true,
+    "match": {
+      "paths": [
+        "~/.cache/huggingface"
+      ],
+      "kind": "dir"
+    }
+  },
+  {
+    "id": "codex-runtimes",
+    "title": "Codex runtime downloads",
+    "pluralTitle": "Codex runtime downloads",
+    "explanation": "Runtimes and dependencies the Codex coding tool downloaded to run code. Safe to remove; Codex downloads them again when it needs them.",
+    "category": "developer", "label": "safe", "regenerates": true,
+    "match": { "paths": ["~/.cache/codex-runtimes"], "kind": "dir" }
+  },
+  {
+    "id": "gem-cache",
+    "title": "Ruby gem cache",
+    "pluralTitle": "Ruby gem caches",
+    "explanation": "Downloaded Ruby packages kept by RubyGems and Bundler. Safe to remove; they download again the next time you install.",
+    "category": "developer", "label": "safe", "regenerates": true,
+    "match": { "paths": ["~/.cache/gem"], "kind": "dir" }
+  },
+  {
+    "id": "pre-commit-cache",
+    "title": "pre-commit hook environments",
+    "pluralTitle": "pre-commit hook environments",
+    "explanation": "Tools the pre-commit framework installed to check your code before each commit. Safe to remove; pre-commit sets them up again on the next commit.",
+    "category": "developer", "label": "safe", "regenerates": true,
+    "match": { "paths": ["~/.cache/pre-commit"], "kind": "dir" }
+  },
+  {
+    "id": "node-gyp-cache",
+    "title": "Node.js build headers",
+    "pluralTitle": "Node.js build headers",
+    "explanation": "Header files node-gyp downloaded to build native Node.js packages. Safe to remove; it downloads them again when a package needs building.",
+    "category": "developer", "label": "safe", "regenerates": true,
+    "match": { "paths": ["~/.cache/node-gyp"], "kind": "dir" }
+  },
+  {
+    "id": "go-build-cache",
+    "title": "Go build cache",
+    "pluralTitle": "Go build caches",
+    "explanation": "Compiled pieces of Go programs kept to make builds faster. Safe to remove; Go rebuilds them on the next build (`go clean -cache` does the same).",
+    "category": "developer", "label": "safe", "regenerates": true,
+    "match": { "paths": ["~/.cache/go-build"], "kind": "dir" }
+  },
+  {
+    "id": "bazel-cache",
+    "title": "Bazel build cache",
+    "pluralTitle": "Bazel build caches",
+    "explanation": "Build outputs and downloads kept by Bazel. Safe to remove; the next Bazel build recreates them, which takes longer the first time.",
+    "category": "developer", "label": "safe", "regenerates": true,
+    "match": { "paths": ["~/.cache/bazel"], "kind": "dir" }
+  },
+  {
+    "id": "prisma-engines",
+    "title": "Prisma engine downloads",
+    "pluralTitle": "Prisma engine downloads",
+    "explanation": "Database engines the Prisma tool downloaded. Safe to remove; Prisma downloads them again when a project needs them.",
+    "category": "developer", "label": "safe", "regenerates": true,
+    "match": { "paths": ["~/.cache/prisma"], "kind": "dir" }
+  },
+  {
+    "id": "electron-downloads",
+    "title": "Electron downloads",
+    "pluralTitle": "Electron downloads",
+    "explanation": "Copies of Electron that JavaScript projects downloaded while installing. Safe to remove; they download again on the next install.",
+    "category": "developer", "label": "safe", "regenerates": true,
+    "match": { "paths": ["~/.cache/electron"], "kind": "dir" }
+  },
+  {
+    "id": "typescript-cache",
+    "title": "TypeScript type downloads",
+    "pluralTitle": "TypeScript type downloads",
+    "explanation": "Type definitions your code editor downloaded for JavaScript packages. Safe to remove; the editor downloads them again as needed.",
+    "category": "developer", "label": "safe", "regenerates": true,
+    "match": { "paths": ["~/.cache/typescript"], "kind": "dir" }
+  },
+  {
+    "id": "tool-cache",
+    "title": "Tool cache: {name}",
+    "pluralTitle": "Tool caches",
+    "explanation": "Data a command-line tool keeps. Usually safe to remove, but some tools store settings or downloads here.",
+    "category": "developer", "label": "review", "regenerates": true,
+    "match": { "paths": ["~/.cache"], "kind": "any", "matchChildren": true, "excludePaths": ["~/.cache/lm-studio"] }
+  },
+  {
+    "id": "app-cache",
+    "title": "App cache",
+    "pluralTitle": "App caches",
+    "explanation": "Temporary files an app keeps to work faster. Safe to remove; the app rebuilds what it needs, though it may be a bit slower the first time.",
+    "category": "caches", "label": "safe", "regenerates": true,
+    "match": { "paths": ["~/Library/Caches/*"], "kind": "any" }
+  },
+  {
+    "id": "user-logs",
+    "title": "Logs",
+    "pluralTitle": "Logs",
+    "explanation": "Diagnostic logs and crash reports written by apps. Safe to remove; apps start new logs as needed.",
+    "category": "caches", "label": "safe", "regenerates": true,
+    "match": { "paths": ["~/Library/Logs"], "kind": "dir" }
+  },
+  {
+    "id": "spotlight-index",
+    "title": "Spotlight search index",
+    "pluralTitle": "Spotlight search indexes",
+    "explanation": "Spotlight search index. macOS rebuilds it on its own; deleting it only makes search slow and incomplete for a while, so Freespan leaves it alone.",
+    "category": "system", "label": "keep", "regenerates": true,
+    "match": { "paths": ["~/Library/Metadata/CoreSpotlight"], "kind": "dir" }
+  },
+  {
+    "id": "biome",
+    "title": "Siri & Suggestions activity history",
+    "pluralTitle": "Siri & Suggestions activity history",
+    "explanation": "A record of how you use apps and devices that macOS keeps for Siri, Spotlight and widget suggestions (the Biome database). macOS trims it itself; deleting it only resets those suggestions.",
+    "category": "system", "label": "keep", "regenerates": true,
+    "match": { "paths": ["~/Library/Biome"], "kind": "dir" }
+  },
+  {
+    "id": "apple-intelligence-data",
+    "title": "Siri & Apple Intelligence data",
+    "pluralTitle": "Siri & Apple Intelligence data",
+    "explanation": "Models, settings and learned preferences macOS uses for Siri, Apple Intelligence and suggestions. macOS downloads and manages these itself; Freespan leaves them alone.",
+    "category": "system", "label": "keep", "regenerates": true,
+    "match": { "paths": ["~/Library/DuetExpertCenter", "~/Library/Trial", "~/Library/IntelligencePlatform", "~/Library/Assistant", "~/Library/Suggestions", "~/Library/PersonalizationPortrait"], "kind": "dir" }
+  },
+  {
+    "id": "background-service-data",
+    "title": "macOS background service data",
+    "pluralTitle": "macOS background service data",
+    "explanation": "Data kept by macOS's own background services (in Daemon Containers). macOS manages it; Freespan leaves it alone.",
+    "category": "system", "label": "keep", "regenerates": false,
+    "match": { "paths": ["~/Library/Daemon Containers"], "kind": "dir" }
+  },
+  {
+    "id": "mail-data",
+    "title": "Mail messages",
+    "pluralTitle": "Mail messages",
+    "explanation": "Your email and attachments as stored by the Mail app. Manage it inside Mail (delete old messages or big attachments); Freespan never removes it.",
+    "category": "system", "label": "keep", "regenerates": false,
+    "match": { "paths": ["~/Library/Mail"], "kind": "dir" }
+  },
+  {
+    "id": "messages-data",
+    "title": "Messages history",
+    "pluralTitle": "Messages history",
+    "explanation": "Your iMessage and text conversations and their attachments. To free space, remove large attachments in Messages (or System Settings > General > Storage); Freespan never removes them.",
+    "category": "system", "label": "keep", "regenerates": false,
+    "match": { "paths": ["~/Library/Messages"], "kind": "dir" }
+  },
+  {
+    "id": "safari-data",
+    "title": "Safari data",
+    "pluralTitle": "Safari data",
+    "explanation": "Safari's history, bookmarks, Reading List and website data. To free space, clear history or website data in Safari's settings.",
+    "category": "system", "label": "keep", "regenerates": false,
+    "match": { "paths": ["~/Library/Safari"], "kind": "dir" }
+  },
+  {
+    "id": "calendar-reminders-data",
+    "title": "Calendar & Reminders data",
+    "pluralTitle": "Calendar & Reminders data",
+    "explanation": "Your calendars, events and reminders stored on this Mac. Manage them in Calendar and Reminders.",
+    "category": "system", "label": "keep", "regenerates": false,
+    "match": { "paths": ["~/Library/Calendars", "~/Library/Reminders"], "kind": "dir" }
+  },
+  {
+    "id": "keychains",
+    "title": "Passwords & keys (Keychain)",
+    "pluralTitle": "Passwords & keys (Keychain)",
+    "explanation": "Your saved passwords, certificates and keys. Never delete these; manage them in the Passwords app or Keychain Access.",
+    "category": "system", "label": "keep", "regenerates": false,
+    "match": { "paths": ["~/Library/Keychains"], "kind": "dir" }
+  },
+  {
+    "id": "account-data",
+    "title": "Account sign-in data",
+    "pluralTitle": "Account sign-in data",
+    "explanation": "The internet accounts (iCloud, Google, Exchange, ...) and Apple ID services this Mac is signed in to. Manage them in System Settings > Internet Accounts.",
+    "category": "system", "label": "keep", "regenerates": false,
+    "match": { "paths": ["~/Library/Accounts", "~/Library/IdentityServices"], "kind": "dir" }
+  },
+  {
+    "id": "website-data",
+    "title": "Cookies & website data",
+    "pluralTitle": "Cookies & website data",
+    "explanation": "Cookies and stored website data for Apple's apps and services, which keep you signed in. Removing them signs you out of websites; clear them from Safari's settings instead.",
+    "category": "system", "label": "keep", "regenerates": true,
+    "match": { "paths": ["~/Library/Cookies", "~/Library/HTTPStorages/com.apple.*"], "kind": "any" }
+  },
+  {
+    "id": "apple-app-data",
+    "title": "Apple app data",
+    "pluralTitle": "Apple app data",
+    "explanation": "Settings, documents and data kept by apps and services that come with macOS (Notes, Photos, Mail, Siri and others). Manage it from inside those apps; Freespan leaves it alone. Caches inside it are listed separately.",
+    "category": "system", "label": "keep", "regenerates": false,
+    "yieldsToNested": true,
+    "match": {
+      "paths": [
+        "~/Library/Containers/com.apple.*",
+        "~/Library/Group Containers/group.com.apple.*",
+        "~/Library/Application Support/com.apple.*",
+        "~/Library/Application Support/AddressBook",
+        "~/Library/Application Support/CallHistoryDB",
+        "~/Library/Application Support/CloudDocs",
+        "~/Library/Application Support/FileProvider",
+        "~/Library/Application Support/Knowledge"
+      ],
+      "kind": "any"
+    }
+  },
+  {
+    "id": "saved-window-state",
+    "title": "Saved window state",
+    "pluralTitle": "Saved window state",
+    "explanation": "Window positions macOS restores when you reopen apps. It's small and macOS replaces it constantly, so Freespan leaves it alone.",
+    "category": "system", "label": "keep", "regenerates": true,
+    "match": { "paths": ["~/Library/Saved Application State"], "kind": "dir" }
+  },
+  {
+    "id": "autosave-information",
+    "title": "Unsaved document versions",
+    "pluralTitle": "Unsaved document versions",
+    "explanation": "Changes macOS saved automatically for documents you haven't saved yet. Deleting this can lose work; save or close those documents instead.",
+    "category": "system", "label": "keep", "regenerates": false,
+    "match": { "paths": ["~/Library/Autosave Information"], "kind": "dir" }
+  },
+  {
+    "id": "macos-user-data",
+    "title": "macOS data",
+    "pluralTitle": "macOS data",
+    "explanation": "Data macOS keeps for itself in your Library folder (sharing, Home, Weather, status and follow-up services, metadata and similar). macOS manages it; Freespan leaves it alone.",
+    "category": "system", "label": "keep", "regenerates": false,
+    "yieldsToNested": true,
+    "match": { "paths": ["~/Library/Metadata", "~/Library/Sharing", "~/Library/StatusKit", "~/Library/Weather", "~/Library/HomeKit", "~/Library/FrontBoard", "~/Library/CoreFollowUp"], "kind": "dir" }
+  },
+  {
+    "id": "system-caches",
+    "title": "System-wide caches",
+    "pluralTitle": "System-wide caches",
+    "explanation": "Caches shared by all users and macOS services. They need administrator rights to change, so Freespan leaves them alone; macOS trims them itself.",
+    "category": "caches", "label": "protected", "regenerates": true,
+    "match": { "paths": ["/Library/Caches"], "kind": "dir" }
+  },
+
+  {
+    "id": "iphone-backup",
+    "title": "iPhone or iPad backup",
+    "pluralTitle": "iPhone and iPad backups",
+    "explanation": "A full backup of an iPhone or iPad made by Finder. Removing it is fine if the device is backed up to iCloud or you no longer need it; check the date first in Finder > your device > Manage Backups.",
+    "category": "backups", "label": "review", "regenerates": false,
+    "match": { "paths": ["~/Library/Application Support/MobileSync/Backup"], "kind": "dir", "matchChildren": true }
+  },
+
+  {
+    "id": "download-installer",
+    "title": "Installer or archive download",
+    "pluralTitle": "Installer and archive downloads",
+    "explanation": "A disk image, installer package or archive you downloaded. Safe to remove if the app is already installed or you've already extracted what you needed.",
+    "category": "downloads", "label": "review", "regenerates": false,
+    "match": { "paths": ["~/Downloads/*"], "extensions": ["dmg", "pkg", "mpkg", "zip", "xip", "iso", "tar", "gz", "tgz", "7z", "rar"] }
+  },
+  {
+    "id": "download-old",
+    "title": "Old download",
+    "pluralTitle": "Old downloads",
+    "explanation": "Something you downloaded more than a month ago and haven't opened since. Move it somewhere permanent if you still need it; otherwise it can go.",
+    "category": "downloads", "label": "review", "regenerates": false,
+    "match": { "paths": ["~/Downloads/*"], "minAgeDays": 30, "ageBy": "both" }
+  },
+  {
+    "id": "download-recent",
+    "title": "Recent download",
+    "pluralTitle": "Recent downloads",
+    "explanation": "Something you downloaded or used in the last month, so you may still need it. Check it before removing.",
+    "category": "downloads", "label": "review", "regenerates": false,
+    "match": { "paths": ["~/Downloads/*"] }
+  },
+
+  {
+    "id": "apple-app",
+    "title": "Built-in Apple app",
+    "pluralTitle": "Built-in Apple apps",
+    "explanation": "An app that ships with macOS. It's protected by the system and can't be removed.",
+    "category": "applications", "label": "protected", "regenerates": false,
+    "match": { "paths": ["/Applications/Safari.app"], "kind": "dir" }
+  },
+  {
+    "id": "application",
+    "title": "Application",
+    "pluralTitle": "Applications",
+    "explanation": "An installed app. If you no longer use it, moving it to the Trash uninstalls it, and you can reinstall it later from the App Store or the developer's website.",
+    "category": "applications", "label": "review", "regenerates": false,
+    "match": { "paths": ["/Applications/*.app", "/Applications/*/*.app", "~/Applications/*.app"], "kind": "dir" }
+  },
+
+  {
+    "id": "virtual-memory",
+    "title": "Virtual memory & sleep image",
+    "pluralTitle": "Virtual memory & sleep image",
+    "explanation": "Swap files macOS uses when memory is full, plus the sleep image saved when your Mac sleeps. macOS manages these itself; they shrink after a restart.",
+    "category": "system", "label": "protected", "regenerates": true,
+    "match": { "paths": ["/private/var/vm"], "kind": "dir" }
+  },
+  {
+    "id": "system-temporary",
+    "title": "System temporary files",
+    "pluralTitle": "System temporary files",
+    "explanation": "Temporary files and caches for apps that are running. macOS cleans these up on its own, especially after a restart.",
+    "category": "system", "label": "protected", "regenerates": true,
+    "match": { "paths": ["/private/var/folders", "/private/tmp"], "kind": "dir" }
+  },
+  {
+    "id": "system-private",
+    "title": "macOS system data",
+    "pluralTitle": "macOS system data",
+    "explanation": "Databases, logs and settings macOS needs to run. Protected; Freespan never touches them. Time Machine local snapshots also count as system data, and macOS deletes them automatically when space runs low.",
+    "category": "system", "label": "protected", "regenerates": false,
+    "match": { "paths": ["/private/var/*", "/private/*"], "excludePaths": ["/private/var"] }
+  },
+  {
+    "id": "system-library",
+    "title": "Shared system library",
+    "pluralTitle": "Shared system library",
+    "explanation": "Fonts, drivers, frameworks and app support files shared by every user on this Mac. Protected; changing them needs administrator rights.",
+    "category": "system", "label": "protected", "regenerates": false,
+    "match": { "paths": ["/Library/*"] }
+  },
+  {
+    "id": "macos",
+    "title": "macOS",
+    "pluralTitle": "macOS",
+    "explanation": "The operating system itself and the command-line tools installed for all users. Protected; macOS and the Time Machine snapshots it keeps are managed by the system.",
+    "category": "system", "label": "protected", "regenerates": false,
+    "match": { "paths": ["/*"], "excludePaths": ["/Users", "/Applications", "/Library", "/private"] }
+  },
+  {
+    "id": "shared-users-folder",
+    "title": "Shared folder",
+    "pluralTitle": "Shared folders",
+    "explanation": "Files shared between all accounts on this Mac (/Users/Shared). Some apps keep data here too. Freespan only cleans your own home folder.",
+    "category": "system", "label": "protected", "regenerates": false,
+    "match": { "paths": ["/Users/Shared"] }
+  },
+  {
+    "id": "other-users",
+    "title": "Other user: {name}",
+    "pluralTitle": "Other users",
+    "explanation": "Files that belong to another account on this Mac. Freespan only cleans your own home folder; sign in as that user to clean theirs.",
+    "category": "system", "label": "protected", "regenerates": false,
+    "match": { "paths": ["/Users/*"], "excludePaths": ["~"] }
+  },
+
+  {
+    "id": "large-old-file",
+    "title": "Large, untouched file",
+    "pluralTitle": "Large, untouched files",
+    "explanation": "A big file you haven't opened or changed in over six months. If you don't need it any more, removing it frees the space; consider moving it to an external drive or cloud storage instead.",
+    "category": "largeOld", "label": "review", "regenerates": false,
+    "match": {
+      "paths": ["~/**"], "kind": "file", "minSize": 500000000, "minAgeDays": 180, "ageBy": "both",
+      "excludePaths": ["~/Library/**", "~/.*", "~/.*/**", "**/*.photoslibrary/**", "**/*.photolibrary/**", "**/*.musiclibrary/**", "**/*.app/**"]
+    }
+  }
+]

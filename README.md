@@ -1,33 +1,90 @@
-# Freespan
+<p align="center">
+  <a href="https://mcconnelldigital.com/freespan/">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="docs/images/hero-dark.png">
+      <img src="docs/images/hero-light.png" alt="Freespan: see where your disk space went and clean up what's safe. The Clean screen shows 65 GB that is safe to remove." width="900">
+    </picture>
+  </a>
+</p>
 
-Freespan is a free macOS app that shows what is using space on your Mac, explains it in plain words, and helps you clean it up safely.
+<p align="center">
+  <a href="https://mcconnelldigital.com/freespan/"><b>Download Freespan</b></a>
+  &nbsp;·&nbsp;
+  <a href="#build-from-source">Build from source</a>
+  &nbsp;·&nbsp;
+  <a href="#faq">FAQ</a>
+</p>
 
-![Freespan overview](docs/screenshot-overview.png)
+<p align="center">
+  <img alt="macOS 15 or later" src="https://img.shields.io/badge/macOS-15%2B-1b6b6b">
+  <img alt="Swift and SwiftUI" src="https://img.shields.io/badge/Swift-SwiftUI-1b6b6b">
+  <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-1b6b6b"></a>
+  <img alt="Free, no account, no tracking" src="https://img.shields.io/badge/price-free-1b6b6b">
+</p>
 
-## Features
+Freespan is a free, open-source Mac app that shows where your disk space went, explains what each item is in plain words, and cleans up what is safe to remove.
 
-- **Fast scan of your home folder or the whole disk.** Sizes count allocated space and skip hard-link and clone duplicates. Results are cached, so the app opens with your last scan.
-- **Built-in rules for 80+ common space users**: Xcode DerivedData, device support files and simulators, package manager caches (npm, Homebrew, CocoaPods, pip, Cargo, Gradle and others), `node_modules`, Docker disk images, browser and app caches, local AI models, old downloads and installers, iPhone backups, and large old files.
-- **Every item gets a label**: *Safe to remove* (it comes back on its own), *Check first*, or *Keep*. Things your Mac or your apps need are never suggested.
-- **Names before paths.** Items no rule covers are identified locally from app IDs, a table of known locations, Spotlight metadata and file types, so you see "Slack's cache" rather than a bare folder name.
-- **Easy and Advanced modes.** Easy mode shows one "Clean Up Safely" button and a short "Check first" list. Advanced mode shows every group, label and source, plus whole-disk scans, a size threshold and excluded folders.
-- **Space Map**: a ring chart of your folders that you can drill into.
-- **Apps**: lists installed apps with the data each one keeps elsewhere. Clear an app's regenerable extras, uninstall an app together with its data, or find data left behind by apps you already removed.
-- **In-use checks.** Items a running app has open are skipped, and Freespan offers to quit the app (only apps you can quit, never background services). Folders that are only partly in use are cleaned partly.
-- **Deep Clean Plan**: a ranked cleanup plan built from the rules, with no AI involved.
-- **Ask**: an optional panel for questions about your disk.
-- **History with Undo** for every item Freespan has moved.
-- Quick Look and Reveal in Finder for any item.
+**[Download Freespan for Mac](https://mcconnelldigital.com/freespan/)** (a notarized DMG, about 5 MB, from the project's download page).
 
-![Clean up safely](docs/screenshot-cleanup.png)
-![Apps](docs/screenshot-apps.png)
+<p align="center">
+  <img src="docs/images/tour.gif" alt="A tour of Freespan: the Clean screen, the cleanup review sheet, the Explore ring chart, the Apps list, and the uninstall sheet." width="800">
+</p>
 
-## Safety model
+## What it does
 
-- **Trash only.** Freespan never deletes anything permanently. Cleanup uses the system's Move to Trash, and every move is written to an undo log (`~/Library/Application Support/Freespan/actions.json`), so you can put things back from History. You get the space back when you empty the Trash.
-- **Only built-in rules can mark something Safe.** Labels from local identification or from any AI assistant are capped at *Check first*, and they are never included in "Clean Up Safely" or the Safe steps of the Deep Clean Plan.
-- **Protected paths.** A fixed list of locations (your Keychain, Mail, Messages, Photos and Music libraries, iCloud Drive, SSH and cloud credentials, system folders, other users' folders and more) can never be moved, whatever a rule or assistant says.
-- **AI is local-first.** By default the assistant is Apple's on-device model (Foundation Models), so nothing leaves your Mac. Claude is optional and off by default. You can turn it on in Settings with your Claude subscription (through the `claude` command-line tool) or an Anthropic API key, which is stored in your Keychain. Claude sees file names, sizes and dates, never file contents, and your home folder path is shortened to `~` before anything is sent. You can also turn the assistant off and use rules and local identification only.
+- **Scans your home folder** (Easy mode) **or the whole disk** (Advanced mode) and shows real sizes. Sizes count the space files actually take up on disk, and a file with several hard links is counted once. Your last scan is cached, so the app opens with results already on screen.
+- **Tells you what is safe to clean.** More than 80 built-in rules recognize common space users: Xcode build files, device support files and simulators, package manager caches (npm, Homebrew, CocoaPods, pip, Cargo, Gradle and others), `node_modules`, Docker disk images, browser and app caches, local AI models, old installers, iPhone backups, and large old files.
+- **Labels every item** as *Safe to remove* (it comes back on its own), *Check first*, or *Keep*. Items your Mac or your apps need are not offered for removal.
+- **Names before paths.** Items no rule covers are identified on your Mac from app IDs, a table of known locations, Spotlight metadata and file types, so you see "Slack's cache" and not just a folder name.
+- **Cleans up in one step.** *Clean Up Safely* lists what it will move, with a switch for each group and a running total.
+- **Explore** is an interactive ring chart of your folders. Click a slice to drill in. Quick Look and Reveal in Finder work on any item.
+- **Apps** lists installed apps with the data each one keeps elsewhere. You can clear an app's extras (caches and files that come back on their own), uninstall an app together with its data, or find data left behind by apps you already removed.
+- **History with Undo** for everything Freespan has moved.
+- **Skips what is in use.** If a running app has an item open, Freespan leaves it alone and offers to quit the app (apps you can quit, never background services). A folder that is only partly in use is cleaned partly.
+
+## What it never does
+
+- **It never deletes anything permanently.** Cleanup uses the system's Move to Trash. Every move is written to an undo log (`~/Library/Application Support/Freespan/actions.json`), and History can put items back. You get the space back when you empty the Trash, which Freespan does not do for you.
+- **It never lets a guess count as safe.** Only the built-in rules can label something *Safe to remove*. A label from local identification or from any AI assistant stops at *Check first*, and is never included in *Clean Up Safely*.
+- **It never touches protected locations.** A fixed list can't be moved whatever a rule or assistant says. It includes your Keychains, Mail, Messages, Safari data, Calendars and Reminders, iCloud Drive, Photos and Music libraries, most dot-folders in your home folder (such as `.ssh`), the folders `Desktop`, `Documents`, `Downloads`, `Pictures`, `Music` and `Movies` themselves (items inside can still be cleaned), Safari.app, and everything outside your home folder and `/Applications`. The list is in [`ProtectedPaths.swift`](FreespanKit/Sources/FreespanKit/Rules/ProtectedPaths.swift).
+- **It has no account, no analytics and no update check.** See [Privacy](#privacy).
+
+## Screenshots
+
+The images below were rendered from sample data, so they show no real files.
+
+<table>
+  <tr>
+    <td width="50%"><a href="docs/images/clean.jpg"><img src="docs/images/clean.jpg" alt="The Clean screen"></a><br><sub><b>Clean.</b> How full your Mac is, how much is safe to remove, and what is using the space.</sub></td>
+    <td width="50%"><a href="docs/images/cleanup-sheet.jpg"><img src="docs/images/cleanup-sheet.jpg" alt="The cleanup review sheet"></a><br><sub><b>Review before anything moves.</b> A switch for each group, a total, and Move to Trash.</sub></td>
+  </tr>
+  <tr>
+    <td width="50%"><a href="docs/images/explore.jpg"><img src="docs/images/explore.jpg" alt="The Explore ring chart"></a><br><sub><b>Explore.</b> A ring chart of every folder, with the biggest first in the list beside it.</sub></td>
+    <td width="50%"><a href="docs/images/apps.jpg"><img src="docs/images/apps.jpg" alt="The Apps screen"></a><br><sub><b>Apps.</b> Each app with the caches and support files it keeps, plus Remove Extras and Uninstall.</sub></td>
+  </tr>
+  <tr>
+    <td width="50%"><a href="docs/images/uninstall-sheet.jpg"><img src="docs/images/uninstall-sheet.jpg" alt="The uninstall sheet"></a><br><sub><b>Uninstall.</b> Shows exactly what moves to the Trash, and asks the app to quit first.</sub></td>
+    <td width="50%"><a href="docs/images/advanced-overview.jpg"><img src="docs/images/advanced-overview.jpg" alt="The Advanced mode Overview"></a><br><sub><b>Advanced mode.</b> Every group, label and source, and a Deep Clean Plan.</sub></td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center"><a href="docs/images/clean-dark.jpg"><img src="docs/images/clean-dark.jpg" alt="The Clean screen in a dark appearance" width="50%"></a><br><sub><b>Dark appearance.</b> The same Clean screen in dark.</sub></td>
+  </tr>
+</table>
+
+## Easy mode and Advanced mode
+
+Freespan opens in **Easy mode**. It shows one question per screen in plain words: how full your Mac is, how much is safe to remove, and a short "Worth a look" list of items that need your decision (each with Remove, Keep and Quick Look). Easy mode scans your home folder and hides items you can't act on.
+
+**Advanced mode** adds an Overview with the Deep Clean Plan (a ranked plan built from the rules), every group with sortable tables (label, size, last used, and where the label came from), whole-disk scans, a minimum item size, and a list of folders to skip. Switch modes in the menu bar (⌘1 for Easy, ⌘2 for Advanced) or in Settings.
+
+## How Freespan decides what is safe
+
+1. A built-in rule must match the item. The rules are plain data in [`Rules.json`](FreespanKit/Sources/FreespanKit/Rules/Rules.json), and each one marks matching items *Safe*, *Review* (shown as *Check first* in Easy mode) or *Keep*.
+2. *Safe to remove* means the item comes back on its own (a cache or build output) or is an installer you can download again.
+3. Anything the rules don't cover can be identified locally for display, but its label can't go above *Check first*.
+4. Every move is checked against the protected-path list, including the path after symlinks are resolved.
+5. Items in use by a running app are skipped.
+6. The result goes to the Trash and into the undo log.
 
 ## Requirements
 
@@ -35,13 +92,17 @@ Freespan is a free macOS app that shows what is using space on your Mac, explain
 - The on-device assistant needs macOS 26 with Apple Intelligence turned on. Everything else works without it.
 - Full Disk Access is recommended. Without it, macOS hides protected folders such as Desktop, Documents and Downloads from the scan. Freespan asks once on first launch.
 
-## Install
+## Privacy
 
-Download the DMG from [mcconnelldigital.com/freespan](https://mcconnelldigital.com/freespan/), open it, and drag Freespan to Applications.
+- **No account, no analytics, no crash reporting, and no update check.** In the source, the only code that makes a network request is the optional Claude API client, which sends requests to `api.anthropic.com`. You have to choose it in Settings and give it your own API key.
+- **Scans, rules and identification run on your Mac.**
+- **The optional Ask panel and item labeling** use Apple's on-device model by default, so nothing leaves your Mac. You can also turn the assistant off, or choose Claude in Settings, either through your Claude subscription (using the `claude` command-line tool, if you have it installed) or with an Anthropic API key (stored in your Keychain).
+- **If you choose Claude,** Freespan sends file names, sizes and dates, never file contents, and your home folder path is shortened to `~` first. That data goes to Anthropic under your own account's terms.
+- **The undo log and scan cache stay on your Mac**, in `~/Library/Application Support/Freespan/`.
 
 ## Build from source
 
-You need Xcode 26 and [XcodeGen](https://github.com/yonaskolb/XcodeGen) (`brew install xcodegen`).
+You need a recent Xcode (Xcode 26, because the on-device assistant uses macOS 26 APIs) and [XcodeGen](https://github.com/yonaskolb/XcodeGen) (`brew install xcodegen`).
 
 ```sh
 git clone https://github.com/mcconnellj-Dev/freespan.git
@@ -70,12 +131,43 @@ Scripts:
 - `scripts/install.sh` builds a Release copy and installs it to `/Applications` (the old copy goes to the Trash).
 - `scripts/make-dmg.sh` builds a Release copy and packages `build/Freespan-<version>.dmg`. With a Developer ID Application certificate and a `freespan-notary` notarytool profile in the keychain, it signs, notarizes and staples the DMG.
 
-## Project layout
+### Project layout
 
 - `App/`: the SwiftUI app (views, app model, sample data for previews).
 - `FreespanKit/`: a Swift package with the scanner, rule engine (`Rules/Rules.json`), protected paths, cleanup and undo log, app inventory, local identification and the assistant integrations.
 - `project.yml`: the XcodeGen spec that produces `Freespan.xcodeproj`.
+- `tools/screenshots/`: the harness that renders the screenshots in `docs/` from sample data.
+
+## FAQ
+
+**Is Freespan really free?**
+Yes. There is no paid tier and no account. The source is under the MIT license.
+
+**Will it delete my files?**
+It moves items to the Trash and never deletes anything permanently. Open History to put items back, or restore them from the Trash yourself. Space is freed when you empty the Trash.
+
+**What does "Check first" mean?**
+Freespan can't be sure the item is safe to remove, or it holds something that is yours (an iPhone backup, an old download, a simulator). Look at it, then choose Remove or Keep.
+
+**What does Keep do?**
+In Easy mode, Keep hides that item from the lists from then on.
+
+**Why does it ask for Full Disk Access?**
+macOS hides folders such as Desktop, Documents and Downloads from apps that don't have it, so the scan would miss them. Freespan works without it but shows less.
+
+**Does it clean RAM or "optimize" my Mac?**
+No. It only looks at disk space.
+
+**Which macOS versions does it support?**
+macOS 15 or later. The on-device assistant needs macOS 26.
+
+**Why can't I clean something I can see in Explore?**
+Items on the protected list, and items your Mac or your apps need, can't be moved. Explore shows them muted.
 
 ## License
 
-MIT. See [LICENSE](LICENSE).
+MIT. See [LICENSE](LICENSE). Copyright 2026 McConnell Digital.
+
+## Credits
+
+Built by [McConnell Digital](https://mcconnelldigital.com/). Freespan uses only Apple frameworks and has no third-party Swift dependencies in the app. Project generation uses [XcodeGen](https://github.com/yonaskolb/XcodeGen). The screenshots in this README are rendered from sample data.
